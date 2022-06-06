@@ -169,7 +169,26 @@ def matches_salary_range(job, salary):
         If `job["min_salary"]` is greather than `job["max_salary"]`
         If `salary` isn't a valid integer
     """
-    pass
+    # https://www.delftstack.com/pt/howto/python/python-check-if-character-is-number/#:~:text=Produ%C3%A7%C3%A3o%3A%20Copy%20True-,Use%20a%20fun%C3%A7%C3%A3o%20isnumeric()%20para%20verificar%20se%20um%20determinado,uma%20determinada%20string%20forem%20n%C3%BAmeros.
+
+    if "max_salary" not in job or "min_salary" not in job:
+        raise ValueError(" 'min_salary' or 'max_salary' doesn't exists")
+
+    if (
+            not str(job["max_salary"]).isnumeric()
+            or not str(job["min_salary"]).isnumeric()):
+        raise ValueError(" 'min_salary' or 'max_salary' aren't valid integers")
+
+    if job["min_salary"] > job["max_salary"]:
+        raise ValueError(" 'min_salary' is greather than 'max_salary' ")
+
+    if type(salary) != int:
+        raise ValueError(" 'salary' isn't a valid integer ")
+
+    # https://pt.stackoverflow.com/questions/161505/em-python-existe-opera%C3%A7%C3%A3o-tern%C3%A1ria
+    return (True if
+            salary >= job["min_salary"] and salary <= job["max_salary"]
+            else False)
 
 
 def filter_by_salary_range(jobs, salary):
